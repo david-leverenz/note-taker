@@ -10,7 +10,7 @@ const app = express();
 // Specify on which port the Express.js server will run
 const PORT = 3001;
 
-// Import 'terms.json' file
+// I think this point something to the database
 const database = require('./db/db.json');
 
 // Static middleware pointing to the public folder
@@ -25,6 +25,13 @@ app.get('/notes', (req, res) =>
 app.get('/api/notes', (req, res) =>
   res.json(database));
 
+// I need to push things into a server database from the front-end (like local storage I think) the database is db.json amd I going to need to make a sontructor function (shudder) that does this?
+
+// need a post method
+// app.post
+
+// need a delete mothod
+// app.delete
 
 // listen() method is responsible for listening for incoming connections on the specified port 
 // This puts a listener on this port, it will always be the last thing in your file.
