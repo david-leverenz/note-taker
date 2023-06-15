@@ -13,10 +13,10 @@ const PORT = 3001;
 // I think this point something to the database
 const database = require('./db/db.json');
 
-// Static middleware pointing to the public folder
+// Static middleware pointing to the public folder - serves all the static files through the public folder
 app.use(express.static('public'));
 
-// Enables the route to the notes.html - button works
+// Enables the route to the notes.html - button works - they have to put /notes in the URL (through a button normally) to take them to the public/notes.html file.
 app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, 'public/notes.html'))
 );
@@ -25,12 +25,12 @@ app.get('/notes', (req, res) =>
 app.get('/api/notes', (req, res) =>
   res.json(database));
 
-// I need to push things into a server database from the front-end (like local storage I think) the database is db.json amd I going to need to make a sontructor function (shudder) that does this?
+// I need to push things into a server database from the front-end (like local storage I think) the database is db.json amd I going to pass the data directly to the database
 
 // need a post method
 // app.post
 
-// need a delete mothod
+// need a delete method
 // app.delete
 
 // listen() method is responsible for listening for incoming connections on the specified port 
