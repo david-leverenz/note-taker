@@ -11,7 +11,7 @@ When you click on an existing note in the list in the left-hand column that note
 When you click on the Write icon in the navigation at the top of the page you are presented with empty fields to enter a new note title and the note’s text in the right-hand column.<br>
 
 ## Links
-**GitHub:** <br>
+**GitHub:** https://github.com/david-leverenz/note-taker<br>
 **Demo Recording:** <br>
 **Live Link:** <br>
 **Screen Shot:** <br>
