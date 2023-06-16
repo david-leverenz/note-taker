@@ -1,6 +1,7 @@
 // Import Express.js
 const express = require('express');
 const fs = require('fs');
+const PORT = process.env.PORT || 3001;
 
 // Import built-in Node.js package 'path' to resolve path of files that are located on the server
 const path = require('path');
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Specify on which port the Express.js server will run
-const PORT = 3001;
+// const PORT = 3001;
 
 // I think this point something to the database
 const database = require('./db/db.json');
