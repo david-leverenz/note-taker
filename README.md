@@ -12,16 +12,16 @@ When you click on the Write icon in the navigation at the top of the page you ar
 
 ## Links
 **GitHub:** https://github.com/david-leverenz/note-taker<br>
-**Demo Recording:** <br>
-**Live Link:** <br>
+**Live Link:** https://shielded-wave-83330-57af74f626fa.herokuapp.com/<br>
 **Screen Shot:** <br>
+![image](https://github.com/david-leverenz/note-taker/assets/131185593/1c49a49b-4907-4061-a7f0-6c6de6c3b2e0)
 
 ## Getting Started
 N/A
 ### Dependencies
 N/A
 ### Executing program
-Run the the index.js file from the command line.
+N/A
 ## Help
 No known issues.
 ## Authors
@@ -31,4 +31,4 @@ Version 1.0 Initial Release
 ## License
 This project is licensed under the MIT license.
 ## Acknowledgments
-Special thanks to Poornima, Sam and Dom for their assistance!  Especially Sam, who ensured that I passed all jest tests.
+Special thanks to Poornima, Sam and Dom for their assistance in trying to solve a refresh problem!  Eventually it was Suraj Nair who figured out what I was doing incorrectly.
