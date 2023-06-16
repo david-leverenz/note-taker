@@ -20,7 +20,6 @@ const PORT = 3001;
 // I think this point something to the database
 const database = require('./db/db.json');
 
-
 // Static middleware pointing to the public folder - serves all the static files through the public folder
 app.use(express.static('public'));
 
@@ -36,7 +35,7 @@ app.get('/api/notes', (req, res) => {
 });
 
 // POST request to add a note
-app.post('/api/notes', (req, res) => {
+app.post('/api/notes', (req, res, next) => {
   // console.info(`${req.method} request received to add a note`);
   const { title, text } = req.body;
   if (title && text ) {
@@ -50,23 +49,23 @@ app.post('/api/notes', (req, res) => {
       // error ? console.log(error) : console.log(data);
       const notes = JSON.parse(data)
       notes.push(newNote)
-      fs.writeFile(`./db/db.json`, JSON.stringify(notes, null, 2), (err) =>
+      // console.log(notes);
+      fs.writeFile('./db/db.json', JSON.stringify(notes, null, 2), (err) =>
         err
           ? console.error(err)
           : console.log(
             `Task for ${newNote.title} has been written to JSON file`
           )
+          // return notes;
       );
     })
     const response = {
       status: 'success',
       body: newNote,
     };
-    // reload()
-    // res.redirect('back');
-    // res.status(201).json(response);
     console.log('I got to it');
-    res.redirect('/api/notes')
+    res.redirect('/')
+    next();
   } else {
     res.status(500).json('Error in posting review');
   }
