@@ -1,35 +1,24 @@
-// Import Express.js
+// Require statements for all of the things I am going to use.  Port specification.
 const express = require('express');
 const fs = require('fs');
 const PORT = process.env.PORT || 3001;
-
-// Import built-in Node.js package 'path' to resolve path of files that are located on the server
 const path = require('path');
-
-// Helper method for generating unique ids
 const uuid = require('./helpers/uuid');
 
 // Initialize an instance of Express.js
 const app = express();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Specify on which port the Express.js server will run
-// const PORT = 3001;
-
-// I think this point something to the database
-const database = require('./db/db.json');
 
 // Static middleware pointing to the public folder - serves all the static files through the public folder
 app.use(express.static('public'));
 
-// Enables the route to the notes.html - button works - they have to put /notes in the URL (through a button normally) to take them to the public/notes.html file.
+// Enables the route to the notes.html
 app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/notes.html'))
 });
 
-// I think this sets up so that I can get the database contents
+// Creates route for the display of the database contents.
 app.get('/api/notes', (req, res) => {
   fs.readFile('./db/db.json', 'utf8', (err, data) => {
     if (err) throw err;
@@ -37,9 +26,9 @@ app.get('/api/notes', (req, res) => {
   });
 });
 
-// POST request to add a note
+// Creates a route to post a new note. Uses the id creator to give each new entry a unique id. Reads the database and pushes the new note into it then write the database back down.
 app.post('/api/notes', (req, res) => {
-  // console.info(`${req.method} request received to add a note`);
+  
   const { title, text } = req.body;
   if (title && text) {
     const newNote = {
@@ -47,9 +36,8 @@ app.post('/api/notes', (req, res) => {
       text,
       id: uuid(),
     };
-    const reviewString = JSON.stringify(newNote);
-    fs.readFile('./db/db.json', "utf8", (error, data) => {
-      // error ? console.log(error) : console.log(data);
+      fs.readFile('./db/db.json', "utf8", (error, data) => {
+      error ? console.log(error) : console.log("Success");
       const notes = JSON.parse(data)
       notes.push(newNote)
       // console.log(notes);
@@ -61,17 +49,15 @@ app.post('/api/notes', (req, res) => {
           )
         );
     })
-  
-    console.log('I got to it');
     res.json(notes)
     } else {
     res.status(500).json('Error in posting review');
   }
 });
 
+// Creates the path and logic for deleting a note.  It gets the appropriate id through parameter ":id".  Then it reads the database and filters out the req.params.id.  Then it writes the resulting data back down.
 app.delete('/api/notes/:id', (req, res) => {
-  console.log("req params", req.params.id);
-// const id = req.params.id
+  
   fs.readFile('./db/db.json', "utf8", (error, data) => {
     if (error) throw error;
     const notes = JSON.parse(data)
