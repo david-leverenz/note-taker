@@ -62,7 +62,11 @@ app.post('/api/notes', (req, res) => {
       status: 'success',
       body: newNote,
     };
-    res.status(201).json(response);
+    // reload()
+    // res.redirect('back');
+    // res.status(201).json(response);
+    console.log('I got to it');
+    res.redirect('/api/notes')
   } else {
     res.status(500).json('Error in posting review');
   }
@@ -74,12 +78,13 @@ app.delete('/api/notes/:id', (req, res) => {
   fs.readFile('./db/db.json', "utf8", (error, data) => {
     // error ? console.log(error) : console.log(data);
     const notes = JSON.parse(data)
-    // console.log(data);
+    // console.log(notes);
+    // console.log("=======================");
 
     const result = notes.filter(notes => notes.id !== req.params.id)
-    console.log(result);
+    // console.log(result);
 
-    fs.writeFile(`./db/db.json`, JSON.stringify(notes, null, 2), (err) =>
+    fs.writeFile(`./db/db.json`, JSON.stringify(result, null, 2), (err) =>
       err
         ? console.error(err)
         : console.log(
@@ -91,7 +96,7 @@ app.delete('/api/notes/:id', (req, res) => {
   //   status: 'success',
   //   body: newNote,
   // };
-  // res.status(201).json(response);
+//   res.status(201).json(response);
 // } else {
 //   res.status(500).json('Error in posting review');
 });
